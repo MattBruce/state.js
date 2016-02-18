@@ -1,12 +1,14 @@
 /*
-clicked (every element clicked is recorded as such) 
-on (every element clicked is marked as on) 
+clicked (every element clicked is recorded as such)
+on (every element clicked is marked as on)
 active (only 1 child can be active)
 current (the very last element that been clicked)
 */
+;(function(){
+"use strict";
 var state = {
   add: function (el, str) {
-    if (!!el.dataset.state) {
+    if(!!el.dataset && !!el.dataset.state){
       state.remove(el, str);
       el.dataset.state = el.dataset.state+" "+str;
     } else {
@@ -14,7 +16,7 @@ var state = {
     }
   },
   remove: function (el, str) {
-    if (!!el.dataset && !!el.dataset.state) {     
+    if (!!el.dataset && !!el.dataset.state) {
       var re = new RegExp(str,"g");
       el.dataset.state = el.dataset.state.replace(re,"");
     }
@@ -38,16 +40,15 @@ var state = {
       var states = el.dataset.state.split(' ');
       var index = states.indexOf(str); //IE >=9
       if (index > -1) {
-        return true
+        return true;
       }
     }
     return false;
   },
   onclick: function (e) {
-    //console.log(e.target,e.currentTarget);
-    //clicked (every element clicked is recorded as such) 
+    //clicked (every element clicked is recorded as such)
     state.add(e.target, "clicked");
-    //on (every element clicked is marked as on) 
+    //on (every element clicked is marked as on)
     state.toggle(e.target, "on");
     //active (only 1 child can be active);
     var children = e.target.parentNode.childNodes;
@@ -65,28 +66,9 @@ var state = {
       state.remove(current[i], "current");
     }
     state.add(e.target, "current");
-    
-    //
   }
-}
-document.addEventListener("click", state.onclick, false);
-document.addEventListener("focus", state.onclick, false);
-
-/* perf test */
-if(0>1){
-var start = performance.now();
-for(i=0; i<1000; i++){ 
-    
-    var str = 'omega iota kappa';
-/*
-    var items = str.split(' ');
-    var index = items.indexOf("omega"); //IE >=9
-    if (index > -1) {items.splice(index, 1);}
-    items.join(' ');
-  //SLOWEST 5.5 */
-
- str.replace(/omega/g,''); //FASTEST 1.5
-   
-}
-console.log(performance.now() - start);
-}
+};
+document.addEventListener("click", state.onclick, false);//a click. dont bubble
+document.addEventListener("focus", state.onclick, false);//for tabbing? dont bubble
+document.addEventListener("touchend", state.onclick, false);//a tap. dont bubble
+}());
