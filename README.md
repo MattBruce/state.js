@@ -10,3 +10,5 @@ on (toggled on click)
 active (set on click, removed on click of sibling. Only 1 child sibling in each family can be active)  
 previous (set on click of sibling. Applied to the last active child sibling in each family)  
 current (the very last element in the whole dom that been clicked) 
+
+https://jsfiddle.net/moob/a8pdmq7f/
