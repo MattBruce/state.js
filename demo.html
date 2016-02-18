@@ -1,0 +1,55 @@
+<!doctype html>
+<html class="no-js" lang="">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+		<title>State.js</title>
+		<link rel="stylesheet" href="demo.css" />
+		
+	</head>
+	<body>
+	<div id="key">
+  <div data-state="clicked">clicked</div> (every element clicked is recorded as such) <br/>
+  <div data-state="on">on</div> (on click toggles the 'on' state) <br/>
+  <div data-state="active">active</div> (only 1 child can be active) <br/>
+    <div data-state="previous">previous</div> (the last previously active child) <br/>
+  <div data-state="current">current </div> (the very last element that been clicked)
+</div>
+
+<div>
+  <p>paragraph</p>
+  <p>paragraph <strong>strong</strong> <span>span</span></p>
+  <a href='#'>link</a><a href='#'>link</a><a href='#'>link</a><a href='#'>link</a><a href='#'>link</a><a href='#'>link</a>
+</div>
+
+<ul>
+  <li>one</li>
+  <li>two</li>
+  <li>three</li>
+  <li>four</li>
+</ul>
+
+<section id="eg1">
+  <div>using 'on'<div>All children can be opened independently</div></div>
+  <div>to control<div>All children can be opened independently</div></div>
+  <div>an accordion<div>All children can be opened independently</div></div>
+</section>
+
+<section id="eg2">
+  <div data-state="active">using 'active'<div>Only one child</div></div>
+  <div>to control<div>may be open</div></div>
+  <div>an accordion<div>at a time</div></div>
+</section>
+
+<section id="eg3">
+<a id="slide0trigger" data-state="active">1</a><a id="slide1trigger">2</a><a id="slide2trigger">3</a>
+  <ul>
+  <li id="slide0">using 'active'</li>
+  <li id="slide1">&nbsp;<br/>to control</li>
+  <li id="slide2">&nbsp;<br/>&nbsp;<br/>a slider</li>
+  </ul>
+</section>
+
+		<script src="state.js"></script>
+	</body>
+</html>
